@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Employee Dashboard | Keyframe Effects</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleAdmin.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleProfile.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleDialogLock.css">
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+
+    <style>
+        .custom-select {
+            position: relative;
+            display: inline-block;
+            width: 200px;
+        }
+
+        .options-list {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .options-list li {
+            cursor: pointer;
+            padding: 8px 12px;
+        }
+
+        .options-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        #pdf {
+    text-align: center;
+}
+
+#pdf canvas {
+    border: 1px solid black;
+    width: 95%;
+}
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-header">
+        </div>
+
+        <div class="side-content">
+            <% if(locals.infoEmployeeLayout) { %>
+                <div class="profile">
+                    <img class="profile-img bg-img"
+                        src="data:image/<%=infoEmployeeLayout.img.contentType%>;base64,<%=infoEmployeeLayout.img.data.toString('base64')%>"
+                        alt="Admin">
+                    <h4>
+                        <%= infoEmployeeLayout.fullname %>
+                    </h4>
+                    <small>Staff</small>
+                </div>
+                <% } %>
+
+
+                    <div class="side-menu">
+                        <ul>
+                            <li>
+                                <a href="/employee/profile">
+                                    <span class="las la-user-alt"></span>
+                                    <small>Profile</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/employee/product/">
+                                    <span class="lab la-product-hunt"></span>
+                                    <small>Product</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/employee/transaction">
+                                    <span class="las la-cash-register"></span>
+                                    <small>Transaction</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/employee">
+                                    <span class="las la-tasks"></span>
+                                    <small>Tasks</small>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+
+                <div class="header-menu">
+                    <div class="user">
+                        <button type="button" class="btn btn-info btn-md btn-logout">
+                            <span class="las la-power-off"></span> Log out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <%- body %>
+        </main>
+
+    </div>
+
+    <script>
+        window.onload = () => {
+            console.log(window.location.pathname);
+            $('a').each((index, element) => {
+                if (element.pathname === window.location.pathname) {
+                    $(element).addClass('active');
+                    return false;
+                }
+            });
+            $('a').on('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng trang)
+
+                let linkHref = $(this).attr('href'); // Lấy giá trị đường dẫn từ thuộc tính href của thẻ a
+                window.location.href = `${linkHref}`;
+            });
+
+            $('.btn-logout').on('click', (event) => {
+                window.location.href = `/accounts/logout`
+            })
+        }
+
+    </script>
+</body>
+
+</html>

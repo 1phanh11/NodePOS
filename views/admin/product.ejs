@@ -1,0 +1,250 @@
+<body>
+
+    <div class="main-content">
+        <main>
+            <!-- thông báo gửi mail xác nhận cho nhân viên -->
+            <div id="notification-delete-product" class="col-sm-12">
+                <div
+                    class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã xóa!</strong> Bạn đã xóa sản phẩm thành công
+                </div>
+            </div>
+            <div id="notification-delete-fail" class="col-sm-12">
+                <div
+                    class="alert fade alert-danger alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Xóa thất bại!</strong> Sản phẩm đã tồn tại trong transaction
+
+                </div>
+            </div>
+            <!-- <div id="notification-unlock-employee" class="col-sm-12">
+                <div
+                    class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã mở khóa!</strong> Bạn đã mở khóa tài khoản nhân viên này.
+
+                </div>
+            </div> -->
+
+            <div class="page-header">
+                <h1>Product</h1>
+            </div>
+
+            <div class="page-content">
+
+
+
+                <div class="records table-responsive">
+
+                    <div class="record-header">
+                        <div class="add">
+                            <select name="" id="">
+                            </select>
+                            <button onclick="addProduct()">Add product</button>
+                        </div>
+
+                        <div class="browse">
+                            <select name="" id="">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <th><span class="las la-sort"></span> BARCODE</th>
+                                    <th><span class="las la-sort"></span> TÊN SẢN PHẨM</th>
+                                    <th><span class="las la-sort"></span> GIÁ NHẬP</th>
+                                    <th><span class="las la-sort"></span> GIÁ BÁN</th>
+                                    <th><span class="las la-sort"></span> LOẠI</th>
+                                    <th><span class="las la-sort"></span> NGÀY TẠO</th>
+                                    <th><span class="las la-sort"></span> HÀNH ĐỘNG</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% listProduct.forEach(product=> { %>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td>
+                                            <div class="client">
+                                            </div>
+                                            <div class="client-info">
+                                                <h4>
+                                                    <%= product.Barcode%>
+                                                </h4>
+                                            </div>
+                    </div>
+                    </td>
+                    <td>
+                        <%= product.Product %>
+                    </td>
+                    <td>
+                        <%=product.ImPrice%>
+                    </td>
+                    <td>
+                        <%= product.RePrice%>
+                    </td>
+                    <td>
+                        <%=product.Catelogy%>
+                    </td>
+                    <td>
+                        <%=product['Creation date']%>
+                    </td>
+                    <td>
+                        <div class="actions">
+                            <span style="cursor: pointer;" id="<%=product.Barcode%>" onclick="editProduct(id)"
+                                class="las la-edit"></span>
+                            <span style="cursor: pointer;" id="<%=product.Barcode%>" onclick="deleteProduct(id)"
+                                class="las la-trash"></span>
+                        </div>
+                    </td>
+                    </tr>
+                    <tr>
+                        <%})%>
+
+
+                            </tbody>
+                            </table>
+                            <div class="modal" id="modal-alert">
+                                <div class="modal-overlay" tabindex="-1">
+                                    <div class="modal-container">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="modal-alert-title">
+                                                Error
+                                            </h2>
+                                        </div>
+                                        <div class="modal-text">
+                                            <p id="modal-alert-content">
+                                                Something went wrong.
+                                            </p>
+                                        </div>
+                                        <div class="modal-buttons">
+                                            <button class="modal-button" id="modal-button-primary"
+                                                onclick="document.getElementById('modal-alert').style.display = 'none';">Close</button>
+                                            <button class="modal-button" id="modal-button-secondary"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+            </div>
+
+    </div>
+    </main>
+    <script>
+
+        function notiDelete() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            const status = urlParams.get('status');
+
+            if (message && status === 'deleted') {
+                $('#notification-delete-product').show(); // Hiển thị phần tử
+                setTimeout(() => {
+                    let root = window.location.origin;
+                    $('#notification-delete-product').hide()
+                    window.location.href = `${root}/admin/product`
+                }, 1500);
+            } else {
+                $('#notification-delete-product').hide(); // Ẩn phần tử
+            }
+        }
+
+        function notiDeleteFail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const message = urlParams.get('message');
+            const status = urlParams.get('status');
+
+            if (message && status === 'error') {
+                $('#notification-delete-fail').show(); // Hiển thị phần tử
+                setTimeout(() => {
+                    let root = window.location.origin;
+                    $('#notification-delete-fail').hide()
+                    window.location.href = `${root}/admin/product`
+                }, 1500);
+            } else {
+                $('#notification-delete-fail').hide(); // Ẩn phần tử
+            }
+        }
+
+        notiDelete()
+        notiDeleteFail()
+
+        function addProduct() {
+            let root = window.location.origin;
+            window.location.href = `${root}/admin/product/add`
+        }
+
+        function editProduct(barcode) {
+            let root = window.location.origin;
+            window.location.href = `${root}/admin/product/edit/${barcode}`
+        }
+
+        function deleteProduct(barcode) {
+            show_prompt('Xóa sản phẩm', 'Bạn có chắc chắn muốn xóa sản phẩm này?', false, undefined, 'Yes', `document.getElementById('modal-alert').style.display = 'none'`)
+            $('#modal-button-secondary').on('click', () => {
+                let root = window.location.origin;
+                window.location.href = `${root}/admin/product/delete/${barcode}`
+            })
+        }
+
+
+        function show_prompt(title, message, pribtnHide = false, pribtnLabel = "Close", secBtnLabel = '', secBtnAction = '') {
+            document.getElementById("modal-alert-title").innerHTML = title;
+            document.getElementById("modal-alert-content").innerHTML = message;
+            if (pribtnHide) {
+                document.getElementById("modal-button-primary").style.display = "none";
+            } else {
+                document.getElementById("modal-button-primary").style.display = "inline-block";
+            }
+            document.getElementById("modal-button-primary").innerText = pribtnLabel;
+            if (secBtnLabel != '' && secBtnAction != '') {
+                document.getElementById("modal-button-secondary").innerText = secBtnLabel;
+                document.getElementById("modal-button-secondary").setAttribute('onclick', secBtnAction);
+                document.getElementById("modal-button-secondary").style.display = "inline-block";
+                document.getElementById("modal-button-primary").classList.add("default");
+            } else {
+                document.getElementById("modal-button-secondary").style.display = "none";
+                document.getElementById("modal-button-primary").classList.remove("default");
+            }
+            document.getElementById("modal-alert").style.display = "block";
+        }
+
+        function prompt_visible() {
+            return document.getElementById("modal-alert").style.display === 'block';
+        }
+
+        function close_prompt() {
+            document.getElementById('modal-alert').style.display = 'none';
+        }
+
+
+
+
+    </script>
+    </div>
+</body>

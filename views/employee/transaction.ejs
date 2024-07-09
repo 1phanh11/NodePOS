@@ -1,0 +1,298 @@
+
+<body>
+    <div id="pdf"></div>
+    <div style="max-width: 3000px;" class="container">
+    <div class="main-body">
+        
+        <body class="bg-dark">
+            <div id="notification-delete-product" class="col-sm-12">
+                <div
+                    class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã lưu!</strong> Bạn đã lưu giao dịch thành công
+                </div>
+            </div>
+            <div id="notification-save-invoice" class="col-sm-12">
+                <div
+                    class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã in!</strong> Bạn đã in hóa đơn thành công
+                </div>
+            </div>
+            <div id="notification-delete-fa">
+            <div class="container-fluid my-5">
+                <div class="row">
+                    <!-- Card -->
+                    <div class="col-md-12">
+                        <div class="card m-0 shadow bg-light">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 pr-0 col-sm-12">
+
+                                        <!-- end of card invoice -->
+
+                                        <div class="card mt-3 mb-3">
+                                            <div class="card-header bg-primary text-white">
+                                                <div class="card-title p-0 m-0">
+                                                    <i class="fa fa-users me-2"></i>Khách hàng
+                                                </div>
+                                            </div>
+                                            <div class="card-body px-2 py-1">
+                                                <div class="table-responsive">
+                                                    <table class="table table-sm mb-1">
+                                                        <tr class="mt-1">
+                                                            <td>Số điện thoại</td>
+                                                            <td>
+                                                                <div class="custom-select">
+                                                                    <input type="text" id="searchInput"
+                                                                        class="form-control"
+                                                                        placeholder="Search or add new">
+                                                                    <ul id="optionsList" class="options-list">
+
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tên khách hàng</td>
+                                                            <td>
+                                                                <input type="text" id="no_Name"
+                                                                    class="form-control font-italic" disabled
+                                                                    style="cursor: not-allowed;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Địa chỉ</td>
+                                                            <td>
+                                                                <textarea id="no_address"
+                                                                    class="form-control font-italic" disabled
+                                                                    style="cursor: not-allowed;" rows="2"></textarea>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end of card custome -->
+                                    </div>
+                                    <!-- end of col-md-3 pr-0 col-sm-12 -->
+
+                                    <div class="col-md-9">
+                                        <div class="alert bg-primary p-2 pr-3 " role="alert">
+                                            <h2 class="m-0 p-0 text-right text-dark fw-bolder" id="grandTotal">
+                                                Tổng cộng
+                                                :
+                                                vnd</h2>
+                                            <input type="hidden" id="input-grandTotal" name="grandtotal">
+                                        </div>
+                                        <!-- end of alert -->
+
+                                        <div class="table-responsive">
+                                            <table id="tblTransaksi"
+                                                class="table table-sm table-hover table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="25px">No.</th>
+                                                        <th width="185px">Barcode</Oh>
+                                                        <th>Tên sản phẩm</Oh>
+                                                        <th>Giá</th>
+                                                        <th width="85x">Số lượng</th>
+                                                        <th>Tổng phụ</th>
+                                                        <th width="60px">Hành động</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <p id="no_head">#</p>
+                                                        </td>
+                                                        <td width="282px" colspan="2">
+                                                            <div class="custom-select" style="width: 400px">
+                                                                <input type="text" class="form-control"
+                                                                    placeholder="Tên sản phẩm hoặc giá" autofocus
+                                                                    id="input_code" value="" tabindex="1">
+                                                                <ul id="optionsList-product" class="options-list">
+
+                                                                </ul>
+                                                            </div>
+
+                                                            <input type="hidden" class="form-control"
+                                                                id="nama_barang_hide" value="">
+
+                                                            <input type="hidden" class="form-control"
+                                                                id="id_barang_head" value="">
+
+                                                            <input type="hidden" class="form-control" id="tgl_exp"
+                                                                value="">
+
+                                                            <input type="hidden" class="form-control" id="input_kode2"
+                                                                value="">
+
+                                                            <input type="hidden" class="form-control" placeholder="Stok"
+                                                                id="stok_head" disabled>
+                                                        </td>
+
+                                                        <td width="153px">
+                                                            <input type="hidden" id="productPrice_head">
+
+                                                            <input type="text" class="form-control"
+                                                                placeholder="đơn giá(vnd)" id="productPrice_head_appear"
+                                                                disabled style="cursor: not-allowed;">
+                                                        </td>
+
+                                                        <td width="83px">
+                                                            <input type="number" class="hanya-angka form-control"
+                                                                id="qty_head" placeholder="Qty" value="" min="1"
+                                                                tabindex="2" disabled style="cursor: not-allowed;">
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="hidden" value="" id="subtotal_head">
+
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Rp(subtotal)" value=""
+                                                                id="subtotal_head_appear" disabled
+                                                                style="cursor: not-allowed;">
+                                                        </td>
+
+                                                        <td width="60px">
+                                                            <button class="btn btn-primary" id="btnAdd" tabindex="3"
+                                                                cursor="not-allowed" disabled>
+                                                                <i class="las la-plus-square"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                </thead>
+                                                <tbody id="tbodyTransaksi">
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="row">
+                                            <!-- kalo mau grandtotal tampil dibawah koding ini bisa di-uncomment dan comment koding yang diatas -->
+                                            <!-- <div class="col-md-12">
+                                        <div class="alert bg-primary p-2 pr-3" role="alert">
+                                            <h2 class="m-0 p-0 text-right text-dark fw-bolder" id="grandTotal">GRAND
+                                                TOTAL :
+                                                Rp. 0,-</h2>
+                                            <input type="hidden" name="grandtotal">
+                                        </div>
+                                    </div> -->
+
+                                            <div class="col-md-2"></div>
+
+                                            <div class="col-md-5">
+
+                                                <table class="mt-1">
+                                                    <tr>
+                                                        <td>
+                                                            <p class="fw-bolder mr-4 text-right me-3">Tiền nhận</p>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <div
+                                                                class="input-group input-group-lg mb-2 text-dark inputBayarDiv">
+                                                                <span class="input-group-text fw-bolder">Vnd</span>
+
+                                                                <input type="number" id="inputBayar"
+                                                                    class="form-control fw-bolder" min="1">
+
+                                                                <input type="hidden" name="bayar">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <p class="fw-bolder mr-4 text-right me-3">Tiền thừa</p>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <div class="input-group input-group-lg">
+                                                                <span class="input-group-text fw-bolder">Vnd</span>
+
+                                                                <input type="text" id="outputChange"
+                                                                    class="form-control fw-bolder"
+                                                                    aria-label="Sizing example input"
+                                                                    aria-describedby="inputGroup-sizing-lg" disabled
+                                                                    style="cursor: not-allowed;">
+                                                                <input type="hidden" id="kembalianHidden"
+                                                                    name="kembalian">
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-end">
+                                            <div class="col-md-4 text-right mt-3">
+                                                
+                                                    <button type="submit" class="btn btn-primary ms-1" id="btnSimpan"
+                                                    disabled style="cursor: not-allowed;">
+                                                    <i class="fa fa-save me-2"></i>lưu
+                                                </button>
+                                                
+
+
+
+                                                <button class="btn btn-success ms-1" id="btnCetak" disabled
+                                                    style="cursor: not-allowed;">
+                                                    <i class="fa fa-print me-2"></i>in
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- end of row -->
+                                    </div>
+                                    <!-- end of col-md-9 -->
+                                </div>
+                                <!-- end of row -->
+                            </div>
+                            <!-- end of card-body(utama) -->
+                        </div>
+                        <!-- end of card m-0 -->
+                    </div>
+                </div>
+            </div>
+            <!-- end of container -->
+
+            <!--  Bootstrap Bundle with Popper -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+
+            <!-- jquery -->
+            <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+                integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+            <!-- select2 -->
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+            <!-- jquery mask -->
+            <script src="/js/jquery.mask.min.js"></script>
+
+            <!-- sweetalert2 -->
+            <script src="/js/sweetalert2.all.min.js"></script>
+
+            <!-- custom script -->
+            <script src="/js/main.js"></script>
+        </body>
+    </div>
+</div>
+</body>
+</html>
+

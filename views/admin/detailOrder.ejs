@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/styleOrderDetail.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-body">
+            <%if(locals.detailOrder) {%>
+            <div class="container-fluid my-5  d-flex  justify-content-center">
+                <div class="card card-1">
+                    <div class="card-header bg-white">
+                        <div class="media flex-sm-row flex-column-reverse justify-content-between  ">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-between mb-3">
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col">
+                                <div class="card card-2">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body my-auto text-right">
+                                                <div class="row  my-auto flex-column flex-md-row">
+                                                    <div class="col my-auto"> <h6 class="mb-0"> Jack Jacs</h6></div>
+                                                    <div class="col-auto my-auto"> <small></small></div>
+                                                    <div class="col my-auto"> <small></small></div>
+                                                    <div class="col my-auto"> <small>Qty : 1</small></div>
+                                                    <div class="col my-auto"><h6 class="mb-0">&#8377;3,600.00</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="my-3 ">
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <% for (let key in detailOrder.Buy) { %>
+                           <% if (detailOrder.Buy.hasOwnProperty(key)) { %>
+                              <%let item = detailOrder.Buy[key]; %>
+<div class="row mt-4">
+                            <div class="col">
+                                <div class="card card-2">
+                                    <div class="card-body">
+                                        <div class="media">
+                                            <div class="media-body my-auto text-right">
+                                                <div class="row  my-auto flex-column flex-md-row">
+                                                    <div class="col-auto my-auto "> <h6 class="mb-0"> <%=item.Name%></h6> </div>
+                                                    <div class="col my-auto  "> <small> </small></div>
+                                                    <div class="col my-auto  "> <small></small></div>
+                                                    <div class="col my-auto  "> <small>Qty : <%=item.Quantity%></small></div>
+                                                    <div class="col my-auto ">  <h6 class="mb-0"><%=item.Price%>vnd</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="my-3 ">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                           <%}%> 
+                          <%}%>
+                        
+                        <div class="row mt-4">
+                            <div class="col mt-3">
+                                <div class="row justify-content-between">
+                                    <div class="col-auto"><p class="mb-1 text-dark"><b>Order Details</b></p></div>
+                                    <div class="flex-sm-col text-right col"> <p class="mb-1"><b></b></p> </div>
+                                    <div class="flex-sm-col col-auto"> <p class="mb-1">;</p> </div>
+                                </div>
+                                <div class="row justify-content-between">
+                                    <div class="flex-sm-col text-right col"><p class="mb-1"> <b></b></p> </div>
+                                    <div class="flex-sm-col col-auto"><p class="mb-1">;</p></div>
+                                </div>
+                                <div class="row justify-content-between">
+                                    <div class="flex-sm-col text-right col"><p class="mb-1"><b></b></p></div>
+                                    <div class="flex-sm-col col-auto"><p class="mb-1"></p></div>
+                                </div>
+                                <div class="row justify-content-between">
+                                    <div class="flex-sm-col text-right col"><p class="mb-1"><b></b></p></div>
+                                    <div class="flex-sm-col col-auto"><p class="mb-1"></p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row invoice mt-5">
+                            <div class="col"><p class="mb-1"> Invoice Number : <%= detailOrder._id%></p><p class="mb-1">Invoice Date :  <%= detailOrder.Date%></p></div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="jumbotron-fluid">
+                            <div class="row justify-content-between ">
+                                <div class="col-auto my-auto "><h2 class="mb-0 font-weight-bold">TỔNG HÓA ĐƠN</h2></div>
+                                <div class="col-auto my-auto ml-auto"><h1 class="display-3 "> <%=detailOrder.Total%> vnd</h1></div>
+                            </div>
+                            <div class="row mb-3 mt-3 mt-md-0">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+        </div>
+    </div>
+    
+</body>
+</html>

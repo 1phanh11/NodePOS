@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/pdfjs-dist/build/pdf.min.js"></script>
+    <script src="https://unpkg.com/pdfjs-dist/build/pdf.worker.min.js"></script>
+    <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+    <style>
+        #pdf {
+            text-align: center;
+        }
+
+        #pdf canvas {
+            border: 1px solid black;
+            width: 95%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Only include when rendering is required -->
+
+
+
+    <!-- Include pdfjs version 2.3.200 for Internet Explorer compatibility, no worker required -->
+    <!-- <script src="https://unpkg.com/pdfjs-dist@2.3.200/build/pdf.min.js"></script> -->
+
+    <!-- The pdf will be rendered within this div -->
+    <div id="pdf"></div>
+
+    <script>
+        easyinvoice.createInvoice(dataI, async function (result) {
+            easyinvoice.render('pdf', result.pdf, function () {
+                console.log('Invoice rendered!');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<body>
+
+    <div class="main-content">
+        <main>
+          
+            <!-- <div id="notification-unlock-employee" class="col-sm-12">
+                <div
+                    class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã mở khóa!</strong> Bạn đã mở khóa tài khoản nhân viên này.
+
+                </div>
+            </div> -->
+
+            <div class="page-header">
+                <h1>Product</h1>
+            </div>
+
+            <div class="page-content">
+
+
+
+                <div class="records table-responsive">
+
+                  
+                    </div>
+
+                    <div>
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <th><span class="las la-sort"></span> SỐ ĐIỆN THOẠI</th>
+                                    <th><span class="las la-sort"></span> TÊN KHÁCH HÀNG</th>
+                                    <th><span class="las la-sort"></span> ĐỊA CHỈ</th>
+                                    <th><span class="las la-sort"></span> HÀNH ĐỘNG</th>
+                                  
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% listCustomer.forEach(customer=> { %>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <td>
+                                            <div class="client">
+                                            </div>
+                                            <div class="client-info">
+                                                <h4>
+                                                    <%= customer['Phone Number']%>
+                                                </h4>
+                                            </div>
+                    </div>
+                    </td>
+                    <td>
+                        <%= customer.Name %>
+                    </td>
+                    <td>
+                        <%=customer.Address%>
+                    </td>
+                   
+                    <td>
+                        <div class="actions">
+                            <span style="cursor: pointer;" onclick="getAllTransaction(id)" id="<%=customer['Phone Number']%>"
+                                class="las la-edit"></span>
+                        
+                        </div>
+                    </td>
+                    </tr>
+                    <tr>
+                        <%})%>
+
+
+                            </tbody>
+                            </table>
+                            <div class="modal" id="modal-alert">
+                                <div class="modal-overlay" tabindex="-1">
+                                    <div class="modal-container">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title" id="modal-alert-title">
+                                                Error
+                                            </h2>
+                                        </div>
+                                        <div class="modal-text">
+                                            <p id="modal-alert-content">
+                                                Something went wrong.
+                                            </p>
+                                        </div>
+                                        <div class="modal-buttons">
+                                            <button class="modal-button" id="modal-button-primary"
+                                                onclick="document.getElementById('modal-alert').style.display = 'none';">Close</button>
+                                            <button class="modal-button" id="modal-button-secondary"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+
+            </div>
+
+    </div>
+    </main>
+    <script>
+
+      
+
+
+        function getAllTransaction(phone) {
+            let root = window.location.origin;
+            window.location.href = `${root}/admin/customer/transaction/${phone}`
+        }
+
+        function show_prompt(title, message, pribtnHide = false, pribtnLabel = "Close", secBtnLabel = '', secBtnAction = '') {
+            document.getElementById("modal-alert-title").innerHTML = title;
+            document.getElementById("modal-alert-content").innerHTML = message;
+            if (pribtnHide) {
+                document.getElementById("modal-button-primary").style.display = "none";
+            } else {
+                document.getElementById("modal-button-primary").style.display = "inline-block";
+            }
+            document.getElementById("modal-button-primary").innerText = pribtnLabel;
+            if (secBtnLabel != '' && secBtnAction != '') {
+                document.getElementById("modal-button-secondary").innerText = secBtnLabel;
+                document.getElementById("modal-button-secondary").setAttribute('onclick', secBtnAction);
+                document.getElementById("modal-button-secondary").style.display = "inline-block";
+                document.getElementById("modal-button-primary").classList.add("default");
+            } else {
+                document.getElementById("modal-button-secondary").style.display = "none";
+                document.getElementById("modal-button-primary").classList.remove("default");
+            }
+            document.getElementById("modal-alert").style.display = "block";
+        }
+
+        function prompt_visible() {
+            return document.getElementById("modal-alert").style.display === 'block';
+        }
+
+        function close_prompt() {
+            document.getElementById('modal-alert').style.display = 'none';
+        }
+
+
+
+
+    </script>
+    </div>
+</body>

@@ -1,0 +1,548 @@
+<body>
+
+    <div class="main-content">
+        <main>
+            <!-- thông báo gửi mail xác nhận cho nhân viên -->
+            <div id="notification-resend-mail" class="col-sm-12" >
+                <div
+                    class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã gửi!</strong> Bạn đã gửi thành công email xác nhận cho
+
+                </div>
+            </div>
+            <!-- thông báo chặn nhân viên -->
+            <div id="notification-lock-employee" class="col-sm-12" >
+                <div
+                    class="alert fade alert-simple alert-warning alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã khóa!</strong> Bạn đã khóa tài khoản nhân viên này.
+
+                </div>
+            </div>
+            <!-- thông báo gỡ chặn -->
+            <div id="notification-unlock-employee" class="col-sm-12" >
+                <div
+                    class="alert fade alert-simple alert-info alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+                    <button type="button" class="close font__size-18" data-dismiss="alert">
+                        <span aria-hidden="true"><a>
+                                <i class="fa fa-times greencross"></i>
+                            </a></span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <i class="start-icon far fa-check-circle faa-tada animated"></i>
+                    <strong class="font__weight-semibold">Đã mở khóa!</strong> Bạn đã mở khóa tài khoản nhân viên này.
+
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h1>Dashboard</h1>
+                <small>Home / Dashboard</small>
+            </div>
+
+            <div class="page-content">
+
+                <!-- <div class="analytics">
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>107,200</h2>
+                            <span class="las la-user-friends"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>User activity this month</small>
+                            <div class="card-indicator">
+                                <div class="indicator one" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>340,230</h2>
+                            <span class="las la-eye"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>Page views</small>
+                            <div class="card-indicator">
+                                <div class="indicator two" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>$653,200</h2>
+                            <span class="las la-shopping-cart"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>Monthly revenue growth</small>
+                            <div class="card-indicator">
+                                <div class="indicator three" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-head">
+                            <h2>47,500</h2>
+                            <span class="las la-envelope"></span>
+                        </div>
+                        <div class="card-progress">
+                            <small>New E-mails received</small>
+                            <div class="card-indicator">
+                                <div class="indicator four" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> -->
+
+
+                <div class="records table-responsive">
+
+                    
+
+                    <div>
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <th><span class="las la-sort"></span> EMPLOYEE</th>
+                                    <th><span class="las la-sort"></span> VERIFY</th>
+                                    <th><span class="las la-sort"></span> BLOCK STATUS</th>
+                                    <th><span class="las la-sort"></span> ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% listEmployees.forEach((e, index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <div class="client">
+                                                <img class="client-img bg-img"
+                                                    src="data:image/<%=e.img.contentType%>;base64,<%=e.img.data.toString('base64')%>">
+                                                <div class="client-info">
+                                                    <h4>
+                                                        <%= e.fullname %>
+                                                    </h4>
+                                                    <small>
+                                                        <%= e.email %>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <%= e.verified %>
+                                        </td>
+                                        </td>
+                                        <td>
+                                            <%= e.key %>
+                                        </td>
+                                        <td>
+                                            <div class="actions">
+                                                <% if(!e.verified) {%>
+                                                    <span id="<%= e._id %>" data-index="<%= index %>"
+                                                        style="cursor: pointer;" onclick='reSendEmail(id)' class="lab la-telegram-plane"></span>
+                                                    <% } %>
+                                                        <span id="<%= e._id %>" data-index="<%= index %>"
+                                                            style="cursor: pointer;" class="las la-eye"
+                                                            onclick='detailEmployee(id)'></span>
+                                                        <% if(e.key){ %>
+                                                            <span id="<%= e._id %>" onclick='unlockEmployee(id)'
+                                                                style="cursor: pointer;" class="las la-unlock"></span>
+                                                            <%}else{ %>
+                                                                <span id="<%= e._id %>" onclick='lockEmployee(id)'
+                                                                    style="cursor: pointer;" class="las la-lock"></span>
+                                                                <% } %>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+
+
+                                        <!-- <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/1.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Exty Bruno</h4>
+                                                <small>exty@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $3171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        -$205
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/1.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Exty Bruno</h4>
+                                                <small>exty@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $2171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        <span class="paid">Paid</span>
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/3.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Andrew Bruno</h4>
+                                                <small>bruno@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $3171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        -$205
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/1.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Exty Bruno</h4>
+                                                <small>exty@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $3171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        <span class="paid">Paid</span>
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/1.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Exty Bruno</h4>
+                                                <small>exty@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $2171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        <span class="paid">Paid</span>
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/3.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Andrew Bruno</h4>
+                                                <small>bruno@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $3171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        -$205
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/1.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Exty Bruno</h4>
+                                                <small>exty@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $3171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        -$205
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="client">
+                                           <div class="client-img bg-img" style="background-image: url(img/1.jpeg)"></div>
+                                            <div class="client-info">
+                                                <h4>Exty Bruno</h4>
+                                                <small>exty@crossover.org</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $2171
+                                    </td>
+                                    <td>
+                                        19 April, 2022
+                                    </td>
+                                    <td>
+                                        <span class="paid">Paid</span>
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <span class="lab la-telegram-plane"></span>
+                                            <span class="las la-eye"></span>
+                                            <span class="las la-ellipsis-v"></span>
+                                        </div>
+                                    </td>
+                                </tr> -->
+
+                            </tbody>
+                        </table>
+                        <div class="modal" id="modal-alert">
+                            <div class="modal-overlay" tabindex="-1">
+                                <div class="modal-container">
+                                    <div class="modal-header">
+                                        <h2 class="modal-title" id="modal-alert-title">
+                                            Error
+                                        </h2>
+                                    </div>
+                                    <div class="modal-text">
+                                        <p id="modal-alert-content">
+                                            Something went wrong.
+                                        </p>
+                                    </div>
+                                    <div class="modal-buttons">
+                                        <button class="modal-button" id="modal-button-primary"
+                                            onclick="document.getElementById('modal-alert').style.display = 'none';">Close</button>
+                                        <button class="modal-button" id="modal-button-secondary"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+        <script>
+
+            function notiResend() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const message = urlParams.get('message');
+                const status = urlParams.get('status');
+
+                if (message && status === 'resend') {
+                    $('#notification-resend-mail').show(); // Hiển thị phần tử
+                    setTimeout(() => {
+                        let root = window.location.origin;
+                        $('#notification-resend-mail').hide()
+                        window.location.href = `${root}/admin/`
+                    }, 1500);
+                } else {
+                    $('#notification-resend-mail').hide(); // Ẩn phần tử
+                }
+            }
+
+            function notiLock() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const message = urlParams.get('message');
+                const status = urlParams.get('status');
+
+                if (message && status === 'lock') {
+                    $('#notification-lock-employee').show(); // Hiển thị phần tử
+                    setTimeout(() => {
+                        let root = window.location.origin;
+                        $('#notification-lock-employee').hide()
+                        window.location.href = `${root}/admin/`
+                    }, 1500);
+                } else {
+                    $('#notification-lock-employee').hide(); // Ẩn phần tử
+                }
+            }
+
+            function notiUnlock() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const message = urlParams.get('message');
+                const status = urlParams.get('status');
+
+                if (message && status === 'unlock') {
+                    $('#notification-unlock-employee').show(); // Hiển thị phần tử
+                    setTimeout(() => {
+                        let root = window.location.origin;
+                        $('#notification-unlock-employee').hide()
+                        window.location.href = `${root}/admin/`
+                    }, 1500);
+                } else {
+                    $('#notification-unlock-employee').hide(); // Ẩn phần tử
+                }
+            }
+
+            function reSendEmail(id) {
+                show_prompt('Gửi lại mail xác nhận', 'Bạn có chắc chắn muốn gửi lại mail xác nhận tài khoản nhân viên này?', false, undefined, 'Yes', `document.getElementById('modal-alert').style.display = 'none'`)
+                $('#modal-button-secondary').on('click', () => {
+                    let root = window.location.origin;
+                    window.location.href = `${root}/admin/resend/${id}`
+                })
+            }
+
+            function detailEmployee(id) {
+                let root = window.location.origin;
+                window.location.href = `${root}/admin/employeeDetail/${id}`
+            }
+
+            function unlockEmployee(id) {
+                show_prompt('Mở khóa tài khoản', 'Bạn có chắc chắn muốn mở khóa tài khoản nhân viên này?', false, undefined, 'Yes', `document.getElementById('modal-alert').style.display = 'none'`)
+                $('#modal-button-secondary').on('click', () => {
+                    let root = window.location.origin;
+                    window.location.href = `${root}/admin/unlockEmployee/${id}`
+                })
+            }
+
+            function lockEmployee(id) {
+                show_prompt('Khóa tài khoản', 'Bạn có chắc chắn muốn khóa tài khoản nhân viên này?', false, undefined, 'Yes', `document.getElementById('modal-alert').style.display = 'none'`)
+                $('#modal-button-secondary').on('click', () => {
+                    let root = window.location.origin;
+                    window.location.href = `${root}/admin/lockEmployee/${id}`
+                })
+            }
+
+            function show_prompt(title, message, pribtnHide = false, pribtnLabel = "Close", secBtnLabel = '', secBtnAction = '') {
+                document.getElementById("modal-alert-title").innerHTML = title;
+                document.getElementById("modal-alert-content").innerHTML = message;
+                if (pribtnHide) {
+                    document.getElementById("modal-button-primary").style.display = "none";
+                } else {
+                    document.getElementById("modal-button-primary").style.display = "inline-block";
+                }
+                document.getElementById("modal-button-primary").innerText = pribtnLabel;
+                if (secBtnLabel != '' && secBtnAction != '') {
+                    document.getElementById("modal-button-secondary").innerText = secBtnLabel;
+                    document.getElementById("modal-button-secondary").setAttribute('onclick', secBtnAction);
+                    document.getElementById("modal-button-secondary").style.display = "inline-block";
+                    document.getElementById("modal-button-primary").classList.add("default");
+                } else {
+                    document.getElementById("modal-button-secondary").style.display = "none";
+                    document.getElementById("modal-button-primary").classList.remove("default");
+                }
+                document.getElementById("modal-alert").style.display = "block";
+            }
+
+            function prompt_visible() {
+                return document.getElementById("modal-alert").style.display === 'block';
+            }
+
+            function close_prompt() {
+                document.getElementById('modal-alert').style.display = 'none';
+            }
+
+
+           
+            
+            notiResend()
+            notiLock()
+            notiUnlock()
+        </script>
+    </div>
+</body>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            font-weight: bold;
+        }
+
+        #product-form {
+            background-color: #f7f7f7;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #createProductForm {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-body">
+
+
+<!-- Product Form -->
+<section id="product-form" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>Form thêm sản phẩm</h2>
+            <form method="post" id="createProductForm">
+                <div class="form-group">
+                    <label for="productName">Barcode:</label>
+                    <input value="<%=productBarcode%>" type="text" class="form-control" name="productBarcode" id="productBarcode" placeholder="Nhập barcode"
+                        >
+                </div>
+                <div class="form-group">
+                    <label for="productName">Tên sản phẩm:</label>
+                    <input value="<%=productName%>" type="text" class="form-control" name="productName" id="productName" placeholder="nhập tên sản phẩm"
+                        >
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Giá nhập:</label>
+                    <input value="<%=productPriceImp%>" type="number" class="form-control" name="productPriceImp" id="productPriceImp" placeholder="nhập giá nhập hàng"
+                        >
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Giá bán:</label>
+                    <input value="<%=productPriceEx%>" type="number" class="form-control" name="productPriceEx" id="productPriceEx" placeholder="nhập giá bán"
+                        ></input>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Loại sản phẩm:</label>
+                    <input value="<%=productCategory%>" class="form-control" name="productCategory" id="productCategory" placeholder="nhập loại"
+                        ></input>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Tạo sản phẩm mới</button>
+            </form>
+            <% if ((locals.errorMessage)) { %>
+                <div class="alert mt-2 p-3 alert-danger alert-dismissible fade show">
+                  <button type="button" class="close w-100 h-100" data-dismiss="alert"></button>
+                  <span class="error-message">
+                    <%= errorMessage %>
+                  </span>
+                </div>
+             <% } %>
+             <% if ((locals.success)) { %>
+              <div class="alert mt-2 p-3 alert-success alert-dismissible fade show">
+                <button type="button" class="close w-100 h-100" data-dismiss="alert"></button>
+                <span class="error-message">
+                  <%= success %>
+                </span>
+              </div>
+           <% } %>
+        </div>
+    </div>
+</section>
+        </div>
+    </div>
+
+   
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>

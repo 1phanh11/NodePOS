@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>Admin Dashboard | Keyframe Effects</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleAdmin.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleProfile.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleDialogLock.css">
+
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-header">
+        </div>
+
+        <div class="side-content">
+           <% if(locals.infoAdminForLayout) { %> 
+                <div class="profile">
+                    <img class="profile-img bg-img" src="data:image/<%=infoAdminForLayout.img.contentType%>;base64,<%=infoAdminForLayout.img.data.toString('base64')%>" alt="Admin" >
+                <h4><%= infoAdminForLayout.fullname %></h4>
+                <small>Admin</small>
+            </div>
+            <% } %>
+            
+
+            <div class="side-menu">
+                <ul>
+                    <li>
+                        <a href="/admin/dashboard">
+                            <span class="las la-home"></span>
+                            <small>Dashboard</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/profile">
+                            <span class="las la-user-alt"></span>
+                            <small>Profile</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/register">
+                            <span class="las la-user-plus"></span>
+                            <small>Register staff</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/product/">
+                            <span class="lab la-product-hunt"></span>
+                            <small>Product</small>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/customer/">
+                            <span class="las la-user-alt"></span>
+                            <small>Customer</small>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+
+                <div class="header-menu">
+                    <div class="user">
+                        <button type="button" class="btn btn-info btn-md btn-logout">
+                            <span class="las la-power-off"></span> Log out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <%- body %>
+        </main>
+
+    </div>
+
+    <script>
+        window.onload = () => {
+
+            $('a').each((index, element) => {
+                if (element.pathname === window.location.pathname) {
+                    $(element).addClass('active');
+                    return false;
+                }else{
+                    $(element).removeClass('active');
+                }
+            });
+            $('a').on('click', function (event) {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của thẻ a (chuyển hướng trang)
+
+                let linkHref = $(this).attr('href'); // Lấy giá trị đường dẫn từ thuộc tính href của thẻ a
+                window.location.href = `${linkHref}`;
+            });
+
+            $('.btn-logout').on('click', (event) => {
+                window.location.href = `/accounts/logout`
+            })
+        }
+
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/styleCustomerTransaction.css">
+</head>
+<body>
+    <div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-20">
+            <div class="rounded">
+                <div class="table-responsive table-borderless">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                               
+                                <th>ID</th>
+                                <th>Tên khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Tổng tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body">
+                           <% listCustomerTrans.forEach(ct => { %>
+                            <tr style="cursor: pointer;" onclick="detailTransaction(id)" id="<%=ct._id%>" class="cell-1">
+                                <td># <%=ct._id%></td>
+                                <td><%=ct['Customer Name']%></td>
+                                <td><span><%=ct['Phone Number']%></span></td>
+                                <td><%=ct.Total%> vnd</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                                
+                             <% }) %>
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function detailTransaction(id) {
+        let root = window.location.origin;
+        window.location.href = `${root}/admin/customer/detailTransaction/${id}`
+    }
+</script>
+</body>
+</html>
+
