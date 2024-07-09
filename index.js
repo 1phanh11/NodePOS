@@ -1,6 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
+const serverless = require('serverless-http')
 const layoutExpress = require('express-ejs-layouts')
 const mongoose = require('mongoose')
 const mongodb = require('mongodb')
@@ -48,7 +49,8 @@ app.use((req, res) => {
 
 app.use(cors())
 
-
+app.use('/.netlify/functions/api', app._router)
+module.exports.handler = serverless(app)
 
 mongoose.connect(`mongodb+srv://phanh:test123@cluster0.gq0r5y5.mongodb.net/Final`,{
     useNewUrlParser: true,
